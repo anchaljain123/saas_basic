@@ -1,0 +1,77 @@
+@import "./_layout.scss"; // importing a file
+
+
+ h3 {
+    color: darkgreen;
+ }
+
+// function with a default value
+ @mixin default-text-color($tc: $red){
+     color: $tc;
+ }
+
+// function
+ @mixin myclass{
+    font-size: 42px
+    font-family = 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+ }
+
+// adding property using function and static property & overriting h3 styles writtem above
+h3{
+    background: yellow;
+    @include default-text-color(green)
+}
+
+// calling a function
+p{
+    @include myclass
+}
+
+// both shares same css
+.class1, .class2{
+   color:blue;
+}
+
+// can assign new value to color1 in imported file
+$color1: orange ;
+
+$color2: rgb(76, 245, 9) !default;
+
+// using & for hovering and keeping color value dynamic
+#navbar {
+    a{
+        color: $color1;
+        &:hover{
+            color: rgb(19, 4, 3)
+        }
+    }
+}
+
+//extending selectors
+.myotherclass {
+  @extend .navlinks;
+  font-size: 16px;
+  color: yellow;
+}
+
+p {
+  body.no-touch & {
+    display: none;
+  }
+}
+
+//directives
+article {
+  color: black;
+
+  @if ($color1) { // visualizing layout internals
+    border: 1px dotted red;
+  }
+}
+
+@function make-greener($value) {
+  @return $value + rgb(0,50,0);
+}
+span {
+  background: make-greener(gray);
+}
